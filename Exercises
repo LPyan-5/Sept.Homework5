@@ -1,0 +1,117 @@
+//Exercise 1
+Given an object. Write a recursive function that creates a deep copy of it. (Note:
+Without additional param).
+
+function deepCopy(a){
+    if(typeof a!=='object'||a===null){
+        return a;
+    }
+    let clone={};
+    for(let key in a){
+        
+        if(a[key]!==null&&!Array.isArray(a[key])){
+            clone[key]=deepCopy(a[key]);
+        }
+        else{
+            clone[key]=[];
+            for(let k in a[key]){
+                clone[key][k]=a[key][k];
+            }
+        }
+    }
+    return clone;
+}
+
+let obj= { a: '1', b: { a: 'abc'},c:[2,3,4] };
+let clone=deepCopy(obj);
+console.log(clone);
+
+obj.c[2] = 123;
+console.log(clone.c[2]!==obj.c[2]);
+
+
+//Exercise 2
+Write recursive function range(x,y) to get the integers in range (x,y) where x and
+y are also integers. For example if x = 5 and y = 10 output will be [6, 7, 8, 9].
+(Note: Without using additional param).
+
+function range(x,y){
+    if((y-x)===2){
+        return [x+1];
+    }
+    let arr=range(x,y-1);
+    arr.push(y-1);
+    return arr;
+
+    
+}
+let arr=range(5,11);
+console.log(arr);
+
+
+//Exercise 3
+Given an array which element are integers in range (x, y) not including x and y
+where x and y are also integers. Write a function to sort array without any
+comparison.(Hint: Use object).
+
+//without using object
+function rangeSort(x,y,arr){
+    let sortArr=[];
+    while(x<y){
+        x++;
+        if(arr.includes(x)){
+            sortArr.push(x);
+        }
+    }
+    return sortArr;
+}
+
+let n=rangeSort(5,11,[7,10,6,8]);
+console.log(n);
+
+//using object
+function arrSort(arr){
+        let obj={};
+        for(let i=0; i<arr.length; i++){
+            obj[arr[i]]=i;
+        }
+        return Object.keys(obj);
+}
+
+
+
+console.log(arrSort([9,3,6,1]));
+
+
+//Exercise 4
+Write a recursive function to get all possible subsets of length 3 of the given
+array. Assume that all elements in the array are unique.
+
+
+function subSets(arr,subArray=[],l=0){
+    if(arr.length<=2){
+        return arr;
+    }
+    
+    if(arr.length===3){
+        let small=[arr[0],arr[1],arr[2]];
+        subArray.push(small);
+        return subArray;
+
+    }
+          
+                for(let j=l+1;j<arr.length-1;j++){
+                    for(let k=j+1; k<arr.length;k++){
+                        let small=[arr[l],arr[j],arr[k]];
+                        subArray.push(small);
+                        
+                    }
+                }
+            
+            arr.shift();
+            return subSets(arr,subArray,l);
+}
+
+console.log(subSets([5, 9, 23, 0, -2, -1]));
+console.log(subSets([5, 9,4]));
+console.log(subSets([5]));
