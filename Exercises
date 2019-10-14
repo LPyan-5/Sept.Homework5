@@ -105,8 +105,6 @@ console.log(arrSort([1,9,3,0,6,1,9]));
 
 
 
-console.log(arrSort([9,3,6,1]));
-
 
 //Exercise 4
 Write a recursive function to get all possible subsets of length 3 of the given
