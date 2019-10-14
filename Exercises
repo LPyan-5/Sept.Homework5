@@ -15,7 +15,12 @@ function deepCopy(a){
         else{
             clone[key]=[];
             for(let k in a[key]){
-                clone[key][k]=a[key][k];
+                if(a[key][k]!==null&&!Array.isArray(a[key][k])){
+                    clone[key][k]=deepCopy(a[key][k]);
+                }
+                else{
+                    clone[key][k]=a[key][k];
+                }
             }
         }
     }
