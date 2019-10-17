@@ -41,6 +41,9 @@ y are also integers. For example if x = 5 and y = 10 output will be [6, 7, 8, 9]
 (Note: Without using additional param).
 
 function range(x,y){
+    if((y-x)===1){
+        return [];
+    }
     if((y-x)===2){
         return [x+1];
     }
